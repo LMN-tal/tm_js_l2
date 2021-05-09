@@ -1,0 +1,110 @@
+.page-title {
+  margin: 1rem;
+}
+.errors {
+  color: #a00;
+  font-style: italic;
+  text-align: center;
+}
+.users {
+  display: grid;
+  justify-content: center;
+}
+.user {
+  display: flex;
+  border-radius: 4px;
+  background: #eef;
+  margin: 1rem;
+  padding: 1rem;
+}
+.avatar {
+  margin-right: 1rem;
+}
+.info {
+  flex-grow: 1;
+}
+dl {
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2), inset 1px 1px 1px 1px rgba(255, 255, 255, 0.5);
+  display: grid;
+  grid-template-columns: 6rem auto;
+  grid-gap: 0.3rem;
+}
+dl:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.tag {
+  font-weight: bold;
+}
+.value {
+  margin: 0;
+}
+.buttons {
+  clear: both;
+  margin: 0.8rem 0 0;
+}
+.btn {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius:2px;
+  background-color: #eef;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2), inset 1px 1px 1px 1px rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  margin: 0 1rem 0 0;
+  text-decoration: none;
+  color: #333;
+}
+.edit-user-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+fieldset {
+  margin-top: 0.4rem;
+  padding-top: 0;
+}
+.form-label {
+  margin-top: 0.4rem;
+  width: 100%;
+  display: block;
+}
+.form-label input {
+  display: block;
+  width: 100%;
+}
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.spinner:after {
+  content: ' ';
+  display: block;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 0.5em double currentColor;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 1s linear infinite;
+  font-size: 170px;
+}
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hidden {
+  display: none;
+}
