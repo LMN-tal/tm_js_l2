@@ -16,7 +16,18 @@ class uniqueId {
   }
 }
 
-export default class User extends uniqueId {
+export function toDl(el) {
+  let innerHTML = '<dl>';
+  for (let key in el) {
+    innerHTML += `<dt class="tag tag-${key}">${key}</dt><dd class="value value-${key}">${
+      typeof el[key] === 'object' && el[key] !== null ? toDl(el[key]) : el[key]
+    }</dd>`;
+  }
+  innerHTML +='</dl>'
+  return innerHTML;
+}
+
+export class User extends uniqueId {
   constructor({ id, name, username, email, address, phone, website, company }) {
     super();
     this.name = name;
@@ -31,9 +42,29 @@ export default class User extends uniqueId {
   get lastName() {
     return this.name.split(' ').pop();
   }
-  // Method 2 - is invoked by u1.toString() and returns "name (e-mail)"
-  toString() {
-    return `${this.name} (${this.email})`;
+  // Method 2 - is invoked by u1.toDiv() and returns "name (e-mail)"
+  toDiv() {
+    const element = document.createElement('div');
+    element.classList.add('user');
+    element.setAttribute('id', `user-${this.id}`);
+    const info = document.createElement('div');
+    info.classList.add('info');
+    info.innerHTML = toDl(this);    
+    const buttons = document.createElement('div');
+    buttons.classList.add('buttons');
+    const editButton = document.createElement('a');
+    editButton.classList.add('btn');
+    editButton.innerHTML = 'Edit';
+    editButton.setAttribute('href', `#user${this.id}/edit`);
+    const deleteButton = document.createElement('a');
+    deleteButton.classList.add('btn');
+    deleteButton.innerHTML = 'Delete';
+    deleteButton.setAttribute('href', `#user${this.id}/delete`);
+    buttons.appendChild(editButton);
+    buttons.appendChild(deleteButton);
+    info.appendChild(buttons);
+    element.appendChild(info);
+    return element;
   }
   // Method 3 - static method applied to a class and can be used to calculate distance
   // between 2 users which are instances of that class: user.distance(u1, u2) returns distance in meters

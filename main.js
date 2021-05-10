@@ -1,4 +1,4 @@
-import User from './user.js';
+import {toDl, User} from './user.js';
 import Error from './error.js';
 const userList = document.getElementById('users');
 const editUser = document.getElementById('edit-user');
@@ -40,51 +40,15 @@ function changePage() {
 
 function generateUsers(users) {  
   userList.innerHTML = '<h2 class="page-title">Users</h2>';
-  users.forEach((user) => {    
-    arrUsers.push(new User(user));
-    userList.appendChild(addUser(user));
+  users.forEach((record) => {  
+    let user = new User(record);
+    arrUsers.push(user);
+    userList.appendChild(user.toDiv());
   });
   // Example of static method distance(user1, user2);
   console.log("Distance from user 1 to user 2 = ", User.distance(arrUsers[0], arrUsers[1]),"m");
 }
 
-function toDl(el) {
-  let html = '<dl>';
-  for (let key in el) {
-    html += `<dt class="tag tag-${key}">${key}</dt><dd class="value value-${key}">${
-      typeof el[key] === 'object' && el[key] !== null ? toDl(el[key]) : el[key]
-    }</dd>`;
-  }
-  html += '</dl>';
-  return html;
-}
-
-function addUser(user) {
-  const element = document.createElement('div');
-  element.classList.add('user');
-  element.setAttribute('id', `user-${user.id}`);
-  const info = document.createElement('div');
-  info.classList.add('info');
-
-  info.innerHTML = toDl(user);
-  const buttons = document.createElement('div');
-  buttons.classList.add('buttons');
-
-  const editButton = document.createElement('a');
-  editButton.classList.add('btn');
-  editButton.innerHTML = 'Edit';
-  editButton.setAttribute('href', `#user${user.id}/edit`);
-  const deleteButton = document.createElement('a');
-  deleteButton.classList.add('btn');
-  deleteButton.innerHTML = 'Delete';
-  deleteButton.setAttribute('href', `#user${user.id}/delete`);
-
-  buttons.appendChild(editButton);
-  buttons.appendChild(deleteButton);
-  info.appendChild(buttons);
-  element.appendChild(info);
-  return element;
-}
 
 function addAvatars() {
   const users = document.getElementsByClassName('user');
